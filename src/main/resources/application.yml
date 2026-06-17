@@ -1,0 +1,50 @@
+# ===================================================================
+# Spring Boot Configuration - Routing Service (Global Settings)
+# ===================================================================
+
+spring:
+  application:
+    name: routing-service
+  profiles:
+    active: dev
+
+server:
+  port: 8081
+
+---
+# ===================================================================
+# Development Profile
+# ===================================================================
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+reloadly:
+  client-id: "mw1v0PUKJVwQ9GgsxjLW8WJ8sjzihsxd"
+  client-secret: "cvVYgpDe00-YoR1ekkcahCpRHBaObt-F2E1LSsCnb0NlsL0VZjWVsPuChT1N3KD"
+  #url: "https://topups-sandbox.reloadly.com"
+  audience: "https://topups-sandbox.reloadly.com"
+  gift-card:
+    #url: "https://giftcards-sandbox.reloadly.com"
+    audience: "https://giftcards-sandbox.reloadly.com"
+
+---
+# ===================================================================
+# Production Profile
+# ===================================================================
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+reloadly:
+  client-id: "mw1v0PUKJVwQ9GgsxjLW8WJ8sjzihsxd"
+  client-secret: "cvVYgpDe00-YoR1ekkcahCpRHBaObt-F2E1LSsCnb0NlsL0VZjWVsPuChT1N3KD"
+  #url: "https://topups.reloadly.com"
+  audience: "https://topups.reloadly.com"
+  gift-card:
+    #url: "https://giftcards-sandbox.reloadly.com"
+    audience: "https://giftcards-sandbox.reloadly.com"
