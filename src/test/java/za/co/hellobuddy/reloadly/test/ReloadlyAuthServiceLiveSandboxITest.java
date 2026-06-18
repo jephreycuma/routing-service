@@ -54,7 +54,7 @@ class ReloadlyAuthServiceLiveSandboxITest {
 
 		// When - Attempt a top-up using the valid token
 		try {
-			reloadlyTopup.doTopup(150, 0L, 27728793170L, "ZA", 441, "",
+			reloadlyTopup.doTopup(2, 0L, 27728793170L, "ZA", 441, "",
 					true);
 			System.out.println("Top-up request sent successfully to Reloadly Sandbox.");
 		} catch (Exception e) {

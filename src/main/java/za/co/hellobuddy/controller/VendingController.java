@@ -14,6 +14,7 @@ import za.co.hellobuddy.model.Product;
 import za.co.hellobuddy.records.topup.Operator;
 import za.co.hellobuddy.reloadly.dto.TopupResponse;
 import za.co.hellobuddy.reloadly.topup.ReloadlyTopup;
+import za.co.hellobuddy.reloadly.topup.ReloadlyTopupResult;
 import za.co.hellobuddy.reloadly.topup.RetrieveOperators;
 
 import java.util.ArrayList;
@@ -56,7 +57,8 @@ public class VendingController {
                         entry.getValue(),                          // Get the matching descriptive text value
                         false,
                         operator.destinationCurrencySymbol(),
-                        operator.destinationCurrencyCode()
+                        operator.destinationCurrencyCode(),
+                        (operator.logoUrls() !=null && operator.logoUrls().size()>0)?operator.logoUrls().get(0):null
                     );
                     
                     catalog.add(product);
@@ -74,7 +76,8 @@ public class VendingController {
                             entry.getValue(),
                             false,
                             operator.destinationCurrencySymbol(),
-                            operator.destinationCurrencyCode()
+                            operator.destinationCurrencyCode(),
+                            (operator.logoUrls() !=null && operator.logoUrls().size()>0)?operator.logoUrls().get(0):null
                     );
                     
                     catalog.add(product);
@@ -93,7 +96,8 @@ public class VendingController {
                                 "Topup from "+operator.destinationCurrencySymbol() + operator.localMinAmount() + " to "+operator.destinationCurrencySymbol() + operator.localMaxAmount(),
                                 true,
                                 operator.destinationCurrencySymbol(),
-                                operator.destinationCurrencyCode()); 
+                                operator.destinationCurrencyCode(),
+                                (operator.logoUrls() !=null && operator.logoUrls().size()>0)?operator.logoUrls().get(0):null); 
                         catalog.add(product);
                     }
                 }
@@ -104,7 +108,7 @@ public class VendingController {
     }
 
     @PostMapping("/topups")
-    public ResponseEntity<TopupResponse> topupProduct(@RequestParam("amount") double amount,
+    public ReloadlyTopupResult topupProduct(@RequestParam("amount") double amount,
     		@RequestParam("senderPhoone") Long senderPhoone,
     		@RequestParam("receiverPhone") Long receiverPhone,
     		@RequestParam("countryISO") String countryISO,
@@ -112,11 +116,10 @@ public class VendingController {
     		@RequestParam("senderEmail") String senderEmail,
     		@RequestParam("useLocalAmount") boolean useLocalAmount) throws Exception {
 
-		TopupResponse topupResponse = reloadlyTopup.doTopup(amount, senderPhoone, receiverPhone, countryISO, operatorId, senderEmail,
+		ReloadlyTopupResult result =  reloadlyTopup.doTopup(amount, senderPhoone, receiverPhone, countryISO, operatorId, senderEmail,
 				useLocalAmount);
 		
-		ResponseEntity<TopupResponse> response = ResponseEntity.ok(topupResponse);
-		return response;
+		return result;
 	}
     // Endpoint 2: Process Vending Request
     @PostMapping("/vend")
