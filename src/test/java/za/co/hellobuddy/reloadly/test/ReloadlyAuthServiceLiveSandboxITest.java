@@ -54,7 +54,7 @@ class ReloadlyAuthServiceLiveSandboxITest {
 
 		// When - Attempt a top-up using the valid token
 		try {
-			reloadlyTopup.doTopup(150, 27728703170L, 27728793170L, "ZA", 441, "jephreycuma@hellobuddy.co.za",
+			reloadlyTopup.doTopup(150, 0L, 27728793170L, "ZA", 441, "",
 					true);
 			System.out.println("Top-up request sent successfully to Reloadly Sandbox.");
 		} catch (Exception e) {
@@ -84,7 +84,7 @@ class ReloadlyAuthServiceLiveSandboxITest {
 		try {
 			ObjectMapper objectMapper = new ObjectMapper();
 			ReloadlyGiftCardResponse reloadlyGiftCardResponse = reloadlyGiftCardOrder.orderGiftCard(10, "ZA", 5, 5,
-					"John Doe", "anyone@hellobuddy.africa", "27728703170");
+					"John Doe", "jephreycuma@hellobuddy.co.za", "27728703170");
 			String jsonResponse = objectMapper.writerWithDefaultPrettyPrinter()
 					.writeValueAsString(reloadlyGiftCardResponse);
 

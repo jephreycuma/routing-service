@@ -40,7 +40,11 @@ public class ReloadlyTopup {
 
         // 1. Instantiate your records easily using the canonical constructor
         TopupRequest.PhoneInfo recipient = new TopupRequest.PhoneInfo(countrISOName, recipientPhone);
-        TopupRequest.PhoneInfo sender = new TopupRequest.PhoneInfo(countrISOName, senderPhone);
+        TopupRequest.PhoneInfo sender = null;
+        if(senderPhone != null && senderPhone > 0) {
+			sender = new TopupRequest.PhoneInfo(countrISOName, senderPhone);
+		} 
+        new TopupRequest.PhoneInfo(countrISOName, senderPhone);
         String systemUniqueRef = "HB-" + UUID.randomUUID().toString();
 
         TopupRequest requestPayload = new TopupRequest(
